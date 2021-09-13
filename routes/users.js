@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { Users, validateNewUser } = require('../database/models');
-const auth = require('../middleware/auth');
+const validateRestricted = require('../middleware/validateRestricted');
 const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
@@ -32,6 +32,6 @@ const getUser = async (req, res) => {
 };
 
 router.post('/', createUser);
-router.get('/me', auth, getUser);
+router.get('/me', validateRestricted, getUser);
 
 module.exports = router;
